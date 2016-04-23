@@ -23,3 +23,4 @@
 <?php exit;?>	2016-04-21 00:42:47	127.0.0.1	/eat/admin/main?param=adduser	0	sql: insert into user(name,password,role_id,addtime) values('123','123',1,now()), sql errno: 1054, errstr: Unknown column 'role_id' in 'field list'
 <?php exit;?>	2016-04-21 00:43:29	127.0.0.1	/eat/admin/main?param=adduser	0	sql: insert into user(name,password,role_id,addtime) values('123','123',1,now()), sql errno: 1054, errstr: Unknown column 'role_id' in 'field list'
 <?php exit;?>	2016-04-21 00:49:44	127.0.0.1	/eat/admin/main?param=adduser	0	sql: insert into user values(null,fg,dfg,1,now()), sql errno: 1054, errstr: Unknown column 'fg' in 'field list'
+<?php exit;?>	2016-04-21 16:35:36	192.168.18.87	/admin/main.php?param=adduser	0	sql: insert into user values(null,赞赞赞,123,1,now()), sql errno: 1054, errstr: Unknown column '赞赞赞' in 'field list'

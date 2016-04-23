@@ -30,3 +30,8 @@
 <?php exit;?>	2016-04-21 00:50:18	127.0.0.1	/eat/admin/main?param=adduser	0	insert into user values(null,543,435,1,now())
 <?php exit;?>	2016-04-21 00:50:37	127.0.0.1	/eat/admin/main?param=adduser	0	insert into user values(null,534,345,1,now())
 <?php exit;?>	2016-04-21 00:51:22	127.0.0.1	/eat/admin/main?param=adduser	0	insert into user values(null,657,657,1,now())
+<?php exit;?>	2016-04-21 16:35:36	192.168.18.87	/admin/main.php?param=adduser	0	insert into user values(null,赞赞赞,123,1,now())
+<?php exit;?>	2016-04-21 16:37:13	192.168.18.87	/admin/main.php?param=adduser	0	insert into user values(null,'34','1324',1,now())
+<?php exit;?>	2016-04-21 17:03:54	192.168.18.87	/admin/main.php?param=adduser	0	insert into user values(null,'132','234',1,now())
+<?php exit;?>	2016-04-21 17:05:43	192.168.18.87	/admin/main.php?param=adduser	0	insert into user values(null,'123','1234',1,now())
+<?php exit;?>	2016-04-21 17:14:54	192.168.18.87	/admin/main.php?param=adduser	0	insert into user values(null,'324324','234',2,now())

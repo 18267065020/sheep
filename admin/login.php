@@ -1,7 +1,7 @@
 <?php
 $conf = include '../conf.php'; 
 include '../xiunophp/xiunophp.php';   
-//$arr = db_find_one('SELECT * FROM ecs_goods'); 
+//$arr = db_find_one('SELECT * FROM user'); 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,25 +41,6 @@ include '../xiunophp/xiunophp.php';
     </label>
   </div>
 </div>
-
-<div id="forget_model" class="login_padding" style="display:none">
-<br> 
-  <div class="rem_sub">
-  <div class="rem_sub_l">
-   </div>
-    <label>
-     <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="Retrieve now" style="opacity: 0.7;">
-     　　　
-     <input type="submit" class="sub_button" name="button" id="denglou" value="Return" style="opacity: 0.7;">　　
-    
-    </label>
-  </div>
-</div>
-
-
-
-
-
 
 <!--login_padding  Sign up end-->
 </div><!--login_boder end-->

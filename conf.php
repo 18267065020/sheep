@@ -4,7 +4,7 @@ return  array (         // -------------> xiunophp 依赖的配置
 		'type'=>'pdo_mysql',                 
 		'pdo_mysql' => array (                         
 			'master' => array (                                                                                           
-				'host' => 'localhost',                                                                
+				'host' => '127.0.0.1',                                                                
 				'user' => 'root',                                 
 				'password' => 'sheep',                                         
 				'name' => 'eat',                                 

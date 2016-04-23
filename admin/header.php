@@ -31,14 +31,14 @@ include '../xiunophp/xiunophp.php';
                 <li>
                     <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                     <ul class="sub-menu">
-                        <li><a href="index"><i class="icon-font">&#xe008;</i>我要点餐</a></li>
-                        <li><a href="index"><i class="icon-font">&#xe008;</i>点餐记录</a></li>
+                        <li><a href="index.php"><i class="icon-font">&#xe008;</i>我要点餐</a></li>
+                        <li><a href="index.php"><i class="icon-font">&#xe008;</i>点餐记录</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
-                        <li><a href="user"><i class="icon-font">&#xe017;</i>用户管理</a></li>
+                        <li><a href="user.php"><i class="icon-font">&#xe017;</i>用户管理</a></li>
                         <li><a href="system.html"><i class="icon-font">&#xe037;</i>饭店管理</a></li>
                         <li><a href="system.html"><i class="icon-font">&#xe046;</i>菜单管理</a></li>
                         <li><a href="system.html"><i class="icon-font">&#xe045;</i>今日菜单</a></li>
