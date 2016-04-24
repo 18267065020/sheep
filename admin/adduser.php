@@ -59,6 +59,7 @@ if($uid)
     $("#but").click(function(){
         $.post("main.php?param=adduser",
           {
+            id:$("#uid").val(),
             name:$("#name").val(),
             pw:$("#pw").val(),
             role:$("#role").val()
@@ -67,7 +68,6 @@ if($uid)
             var data = JSON.parse(data);
             if(data.isSuccess)
             {
-                alert(data.mes);
                 location.href = "user.php";
             }
             else

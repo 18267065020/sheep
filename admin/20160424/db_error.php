@@ -1,0 +1,2 @@
+<?php exit;?>	2016-04-24 23:46:32	127.0.0.1	/eat/admin/main.php?param=delhotel	0	sql: update hotel set isdefault=1 where id=(select id from hotel order by addtime desc limit 0,1), sql errno: 1093, errstr: You can't specify target table 'hotel' for update in FROM clause
+<?php exit;?>	2016-04-24 23:48:03	127.0.0.1	/eat/admin/main.php?param=delhotel	0	sql: update hotel set isdefault=1 where id in (select id from hotel order by addtime desc limit 0,1), sql errno: 1235, errstr: This version of MySQL doesn't yet support 'LIMIT & IN/ALL/ANY/SOME subquery'

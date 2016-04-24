@@ -3,16 +3,13 @@ $conf = include '../conf.php';
 include '../xiunophp/xiunophp.php';   
 //$arr = db_find_one('SELECT * FROM user'); 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<title>公司宝技术部点餐系统</title>
-<link href="eat/style_log.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="eat/style.css">
-<link rel="stylesheet" type="text/css" href="eat/userpanel.css">
-<link rel="stylesheet" type="text/css" href="eat/jquery.ui.all.css">
+    <meta charset="UTF-8">
+    <title>公司宝技术部点餐系统</title>
+    <link href="eat/style_log.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://www.gongsibao.com/statics/js/home/jquery.min.js"></script>
 
 </head>
 
@@ -25,11 +22,11 @@ include '../xiunophp/xiunophp.php';
 
   <h2>账号</h2>
   <label>
-    <input type="text" id="username" class="txt_input txt_input2" value="">
+    <input type="text" id="username" name="username" class="txt_input txt_input2" value="">
   </label>
   <h2>密码</h2>
   <label>
-    <input type="password" name="textfield2" id="userpwd" class="txt_input" value="">
+    <input type="password" id="userpwd" name="userpwd" class="txt_input" value="">
   </label>
  
   <p class="forgot"><a id="iforget" href="javascript:void(0);">&nbsp;</a></p>
@@ -47,7 +44,26 @@ include '../xiunophp/xiunophp.php';
 </div><!--login_m end-->
  <br> <br>
 <p align="center"> by -- 杨顺康 qq:373175646 </p>
-
-
+</div>
+<script type="text/javascript">
+  $("#button").click(function(){
+    $.post("main.php?param=login",
+      {
+        name:$("#username").val(),
+        pw:$("#userpwd").val()
+      },
+      function(data){
+        var data = JSON.parse(data);
+        if(data.isSuccess)
+        {
+            location.href = "user.php";
+        }
+        else
+        {
+            alert(data.mes);
+        }
+      });
+  });
+</script>
 
 </body></html>

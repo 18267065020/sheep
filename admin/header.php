@@ -39,7 +39,7 @@ include '../xiunophp/xiunophp.php';
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
                         <li><a href="user.php"><i class="icon-font">&#xe017;</i>用户管理</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe037;</i>饭店管理</a></li>
+                        <li><a href="hotel.php"><i class="icon-font">&#xe037;</i>饭店管理</a></li>
                         <li><a href="system.html"><i class="icon-font">&#xe046;</i>菜单管理</a></li>
                         <li><a href="system.html"><i class="icon-font">&#xe045;</i>今日菜单</a></li>
                     </ul>

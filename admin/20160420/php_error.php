@@ -1,6 +1,0 @@
-<?php exit;?>	2016-04-20 23:13:18	127.0.0.1	/eat/admin/index	0	<br> Error[2]: include(header) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory, File: E:\AppServ\www\eat\admin\index.php, Line: 4
-<?php exit;?>	2016-04-20 23:13:18	127.0.0.1	/eat/admin/index	0	<br> Error[2]: include() [<a href='function.include'>function.include</a>]: Failed opening 'header' for inclusion (include_path='.;C:\php5\pear'), File: E:\AppServ\www\eat\admin\index.php, Line: 4
-<?php exit;?>	2016-04-20 23:35:19	127.0.0.1	/eat/admin/main?param=adduser	0	<br> Error[8]: Undefined index:  param, File: E:\AppServ\www\eat\admin\main.php, Line: 5
-<?php exit;?>	2016-04-20 23:35:40	127.0.0.1	/eat/admin/main?param=adduser	0	<br> Error[8]: Undefined variable: GET, File: E:\AppServ\www\eat\admin\main.php, Line: 5
-<?php exit;?>	2016-04-20 23:49:54	127.0.0.1	/eat/admin/main?param=adduser	0	 Error[8]: Use of undefined constant json - assumed 'json', File: E:\AppServ\www\eat\admin\main.php, Line: 19
-<?php exit;?>	2016-04-20 23:50:19	127.0.0.1	/eat/admin/main?param=adduser	0	 Error[8]: Use of undefined constant json - assumed 'json', File: E:\AppServ\www\eat\admin\main.php, Line: 19

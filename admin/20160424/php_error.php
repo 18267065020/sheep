@@ -1,0 +1,2 @@
+<?php exit;?>	2016-04-24 23:46:32	127.0.0.1	/eat/admin/main.php?param=delhotel	0	 Error[1024]: Database Error:You can't specify target table 'hotel' for update in FROM clause, File: E:\AppServ\www\eat\xiunophp\db.class.php, Line: 315
+<?php exit;?>	2016-04-24 23:48:03	127.0.0.1	/eat/admin/main.php?param=delhotel	0	 Error[1024]: Database Error:This version of MySQL doesn't yet support 'LIMIT & IN/ALL/ANY/SOME subquery', File: E:\AppServ\www\eat\xiunophp\db.class.php, Line: 315
