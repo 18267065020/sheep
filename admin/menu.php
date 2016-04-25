@@ -1,6 +1,6 @@
 <?php  
 include './header.php';
-$table = "user";
+$table = "menu";
 $page = param("page");
 if(!$page)
 {
@@ -13,51 +13,70 @@ if($page <= 0)
 $count = db_count($table);
 $pagesize = 10;
 $countpage = ($count % $pagesize) == 0 ? ($count / $pagesize) : ceil($count / $pagesize);
-if($page > $countpage && $page != 1)
+if($page > $countpage)
 {
-    $page = $countpage;
+    if($countpage == 0)
+    {
+        $page = 1;
+        $countpage = 1;
+    }
+    else
+    {
+        $page = $countpage;
+    }
 }
-//echo $uid;
 ?>
     <!--/sidebar-->
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="index.php">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">用户管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="index.php">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">菜单管理</span></div>
         </div>
         <div class="result-wrap">
                 <div class="result-title">
                     <div class="result-list">
-                        用户名称：<input class="common-text" id="name" name="name" value="" type="text"><span style="width:10px; display:inline-block;"></span>
-                        用户密码：<input class="common-text" id="pw" name="pw" value="" type="password"><span style="width:10px; display:inline-block;"></span>
-                        用户权限：<select name="role" id="role">
-                                    <option value="1">管理员</option>
-                                    <option value="2">用户</option>
+                        餐厅名称：<select name="hotel" id="hotel">
+                        <?php 
+                        $hotel = db_find("select * from hotel order by addtime desc");
+                        foreach ($hotel as $key => $value) {
+                            ?>
+                                    <option value="<?php echo $value["id"];?>"><?php echo $value["name"];?></option>
+                                    <?php }?>
                                 </select><span style="width:10px; display:inline-block;"></span>
-                                <a href="javascript:void(0)" id="but"><i class="icon-font"></i>新增用户</a>
+                        菜品名称：<input class="common-text" id="name" name="name" value="" type="text"><span style="width:10px; display:inline-block;"></span>
+                        菜品价格：<input class="common-text" id="price" name="price" value="" type="text"><span style="width:10px; display:inline-block;"></span>
+                        是否启用：<input id="isuse" name="isuse" value="" type="checkbox" checked=checked><span style="width:10px; display:inline-block;"></span>
+                                <a href="javascript:void(0)" id="but"><i class="icon-font"></i>新增菜品</a>
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
                             <th width="5%">标签ID</th>
-                            <th width="30%">用户名称</th>
-                            <th width="30%">用户密码</th>
-                            <th width="20%">用户权限</th>
+                            <th width="20%">餐厅名称</th>
+                            <th width="20%">菜品名称</th>
+                            <th width="20%">菜品价格</th>
+                            <th width="10%">是否启用</th>
                             <th width="10%">创建时间</th>
-                            <th width="5%">操作</th>
+                            <th width="15%">操作</th>
                         </tr>
                         <?php
-                        $arr = db_find("select * from " . $table . " order by addtime desc limit " . ($page - 1) * $pagesize . "," . $pagesize);
+                        $arr = db_find("select * from " . $table . " where isdelete=0 order by addtime desc limit " . ($page - 1) * $pagesize . "," . $pagesize);
                         $num = 0;
                         foreach ($arr as $key => $value) {
                             $num++;
                             ?>
                         <tr>
                             <td data-id="<?php echo $value["id"];?>"><?php echo $num;?></td>  
+                            <td data-id="<?php echo $value["hotel_id"];?>"><?php 
+                                $hotelid = $value["hotel_id"];
+                                $hotelname = db_find_one("select name from hotel where id=$hotelid");
+                                echo $hotelname["name"];
+                                ?>
+                            </td> 
                             <td><?php echo $value["name"];?></td> 
-                            <td><input class="common-text" style="border:0px;" id="pw" name="pw" size="20" value="<?php echo $value["password"];?>" type="password" readonly="readonly"></td> 
-                            <td data-id="<?php echo $value["role_id"];?>"><?php echo $value["role_id"] == 1 ? "管理员" : "用户";?></td>
+                            <td><?php echo $value["price"];?></td> 
+                            <td><input name="isuse" value="" type="checkbox" <?php if($value["isuse"]) echo "checked=checked";?> disabled=disabled></td> 
                             <td><?php echo $value["addtime"];?></td>
                             <td>
                                 <a class="link-update" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">修改</a>
@@ -105,8 +124,9 @@ if($page > $countpage && $page != 1)
           {
             id:0,
             name:$("#name").val(),
-            pw:$("#pw").val(),
-            role:$("#role").val()
+            price:$("#price").val(),
+            hotel:$("#hotel").val(),
+            isuse:($("#isuse").is(':checked') ? 1 : 0)
           },
           function(data){
             var data = JSON.parse(data);
@@ -128,9 +148,10 @@ if($page > $countpage && $page != 1)
             $.post("main.php?param=add<?php echo $table;?>",
               {
                 id : objtd.eq(0).attr("data-id"),
-                name : objtd.eq(1).children("input").val(),
-                pw : objtd.eq(2).children("input").val(),
-                role : objtd.eq(3).children("select").val()
+                name : objtd.eq(2).children("input").val(),
+                price : objtd.eq(3).children("input").val(),
+                hotel : objtd.eq(1).children("select").val(),
+                isuse:(objtd.eq(4).children("input").is(':checked') ? 1 : 0)
               },
               function(data){
                 var data = JSON.parse(data);
@@ -148,13 +169,13 @@ if($page > $countpage && $page != 1)
         }
         else
         {
-            objtd.eq(1).html('<input class="common-text" name="name" size="20" value="' + objtd.eq(1).text() + '" type="text">');
-            objtd.eq(2).children("input").removeAttr("style");
-            objtd.eq(2).children("input").removeAttr("readonly");
-            objtd.eq(3).text("");
-            $("#role").clone().prependTo(objtd.eq(3));
-            objtd.eq(3).children("select").removeAttr("id");
-            objtd.eq(3).children("select").val(objtd.eq(3).attr("data-id"));
+            objtd.eq(1).text("");
+            $("#hotel").clone().prependTo(objtd.eq(1));
+            objtd.eq(1).children("select").removeAttr("id");
+            objtd.eq(1).children("select").val(objtd.eq(1).attr("data-id"));
+            objtd.eq(2).html('<input class="common-text" name="name" size="20" value="' + objtd.eq(2).text() + '" type="text">');
+            objtd.eq(3).html('<input class="common-text" name="price" size="20" value="' + objtd.eq(3).text() + '" type="text">');
+            objtd.eq(4).children("input").removeAttr("disabled");
             $(this).text("保存");
         }
     });

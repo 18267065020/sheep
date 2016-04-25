@@ -13,7 +13,7 @@ include '../xiunophp/xiunophp.php';
 
 </head>
 
-<body class="login" mycollectionplug="bind">
+<body>
 <div class="login_m">
 <div class="login_logo">公司宝技术部点餐系统</div>
 <div class="login_boder">
@@ -44,7 +44,6 @@ include '../xiunophp/xiunophp.php';
 </div><!--login_m end-->
  <br> <br>
 <p align="center"> by -- 杨顺康 qq:373175646 </p>
-</div>
 <script type="text/javascript">
   $("#button").click(function(){
     $.post("main.php?param=login",
@@ -56,7 +55,7 @@ include '../xiunophp/xiunophp.php';
         var data = JSON.parse(data);
         if(data.isSuccess)
         {
-            location.href = "user.php";
+            location.href = "index.php";
         }
         else
         {

@@ -1,7 +1,10 @@
 <?php
 $conf = include '../conf.php'; 
 include '../xiunophp/xiunophp.php';   
-//$arr = db_find_one('SELECT * FROM ecs_goods'); 
+if($_SESSION["role"] == 0)
+{
+    echo "<script>location.href='login.php';</script>";
+}
 ?>
 <!doctype html>
 <html>
@@ -17,7 +20,8 @@ include '../xiunophp/xiunophp.php';
 <div class="topbar-wrap">
     <!--<div class="topbar-inner clearfix">-->
         <div class="topbar-logo-wrap clearfix">
-            <h1 class="topbar-logo"><a href="index.html" class="navbar-brand">点餐喽，小子们</a></h1>
+            <h1 class="topbar-logo"><a href="index.php" class="navbar-brand">点餐喽，小子们</a></h1>
+            <span onclick="javascript:location.href='main.php?param=loginout';" style="cursor:pointer;">注销</span>
         </div>
     </div>
 </div>
@@ -35,15 +39,18 @@ include '../xiunophp/xiunophp.php';
                         <li><a href="index.php"><i class="icon-font">&#xe008;</i>点餐记录</a></li>
                     </ul>
                 </li>
+                <?php if($_SESSION["role"] == 1)
+                { ?>
                 <li>
                     <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                     <ul class="sub-menu">
                         <li><a href="user.php"><i class="icon-font">&#xe017;</i>用户管理</a></li>
-                        <li><a href="hotel.php"><i class="icon-font">&#xe037;</i>饭店管理</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>菜单管理</a></li>
+                        <li><a href="hotel.php"><i class="icon-font">&#xe037;</i>餐厅管理</a></li>
+                        <li><a href="menu.php"><i class="icon-font">&#xe046;</i>菜品管理</a></li>
                         <li><a href="system.html"><i class="icon-font">&#xe045;</i>今日菜单</a></li>
                     </ul>
                 </li>
+                <?php }?>
             </ul>
         </div>
     </div>

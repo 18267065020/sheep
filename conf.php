@@ -1,4 +1,5 @@
 <?php 
+SESSION_START();
 return  array (         // -------------> xiunophp 依赖的配置         
 	'db'=>array(                 
 		'type'=>'pdo_mysql',                 

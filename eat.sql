@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50045
 File Encoding         : 65001
 
-Date: 2016-04-25 01:20:31
+Date: 2016-04-26 01:04:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,8 +63,8 @@ CREATE TABLE `hotel` (
 -- ----------------------------
 INSERT INTO `hotel` VALUES ('1', '111111', '0', '2016-04-24 23:29:53');
 INSERT INTO `hotel` VALUES ('2', '22222', '0', '2016-04-24 23:29:55');
-INSERT INTO `hotel` VALUES ('9', '发郭德纲', '1', '2016-04-24 23:54:17');
-INSERT INTO `hotel` VALUES ('10', '而额外人', '0', '2016-04-24 23:54:20');
+INSERT INTO `hotel` VALUES ('9', '发郭德纲', '0', '2016-04-24 23:54:17');
+INSERT INTO `hotel` VALUES ('10', '而额外人', '1', '2016-04-24 23:54:20');
 
 -- ----------------------------
 -- Table structure for menu
@@ -73,16 +73,20 @@ DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) default NULL,
-  `price` decimal(8,0) default NULL,
+  `price` varchar(50) default NULL,
   `hotel_id` int(11) default NULL,
-  `isuser` tinyint(4) default '1',
+  `isuse` tinyint(4) default '1',
   `isdelete` tinyint(4) default '0',
+  `addtime` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
+INSERT INTO `menu` VALUES ('1', '菜品1', '123', '2', '1', '1', '2016-04-26 00:30:09');
+INSERT INTO `menu` VALUES ('2', '123', '43', '10', '1', '0', '2016-04-26 00:30:21');
+INSERT INTO `menu` VALUES ('3', '滴答滴', '齐全', '9', '0', '0', '2016-04-26 00:31:27');
 
 -- ----------------------------
 -- Table structure for user
@@ -102,7 +106,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', '哈哈', '342', '1', '2016-04-24 10:46:25');
 INSERT INTO `user` VALUES ('22', '123', '123', '1', '2016-04-24 21:00:51');
-INSERT INTO `user` VALUES ('23', '234', '234', '1', '2016-04-24 21:01:47');
+INSERT INTO `user` VALUES ('23', '1234', '1234', '2', '2016-04-24 21:01:47');
 INSERT INTO `user` VALUES ('25', 'dsfgfd123', 'g123', '1', '2016-04-24 21:02:51');
 INSERT INTO `user` VALUES ('32', '4535', '345345', '1', '2016-04-24 22:41:07');
 INSERT INTO `user` VALUES ('31', '打过', 'ret', '1', '2016-04-24 22:34:05');

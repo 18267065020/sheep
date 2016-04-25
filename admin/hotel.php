@@ -30,21 +30,21 @@ if($page > $countpage)
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="index.php">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">饭店管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="index.php">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">餐厅管理</span></div>
         </div>
         <div class="result-wrap">
                 <div class="result-title">
                     <div class="result-list">
-                        饭店名称：<input class="common-text" id="name" name="name" value="" type="text"><span style="width:10px; display:inline-block;"></span>
+                        餐厅名称：<input class="common-text" id="name" name="name" value="" type="text"><span style="width:10px; display:inline-block;"></span>
                         是否默认：<input id="isdefault" name="isdefault" value="" type="checkbox"><span style="width:10px; display:inline-block;"></span>
-                                <a href="javascript:void(0)" id="but"><i class="icon-font"></i>新增饭店</a>
+                                <a href="javascript:void(0)" id="but"><i class="icon-font"></i>新增餐厅</a>
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
                             <th width="15%">标签ID</th>
-                            <th width="40%">饭店名称</th>
+                            <th width="40%">餐厅名称</th>
                             <th width="15%">是否默认</th>
                             <th width="15%">创建时间</th>
                             <th width="15%">操作</th>

@@ -7,6 +7,11 @@ if($param == "login")
 {
     login();
 }
+else if($param == "loginout")
+{
+    $_SESSION["role"] = 0;
+    echo "<script>location.href='login.php';</script>";
+}
 else if($param == "adduser")
 {
     adduser();
@@ -22,6 +27,18 @@ else if($param == "addhotel")
 else if($param == "delhotel")
 {
     delhotel();
+}
+else if($param == "addmenu")
+{
+    addmenu();
+}
+else if($param == "delmenu")
+{
+    delmenu();
+}
+if($param == "order")
+{
+    order();
 }
 function login()
 {
@@ -42,13 +59,13 @@ function login()
     }
     else
     {
-        $user = db_find_one("select role_id from user where name='$name' and password='$pw'");
+        $user = db_find_one("select id,role_id from user where name='$name' and password='$pw'");
         if($user)
         {
+            $_SESSION["role"] = $user["role_id"];
+            $_SESSION["user"] = $user["id"];
             $json["isSuccess"] = true;
             $json["mes"] = "登录成功";
-            //$json["data"] = $user["role_id"];
-            //$_SESSION['role'] = $user["role_id"];
         }
         else
         {
@@ -203,6 +220,99 @@ function delhotel()
         }
         $arr = db_exec("delete from hotel where id=$id");
         $json["data"] = $arr;
+    }
+    echo json_encode($json);
+}
+function addmenu()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $id = $_POST["id"];
+    $name = $_POST["name"];
+    $price = $_POST["price"];
+    $hotel = $_POST["hotel"];
+    $isuse = $_POST["isuse"];
+    if(!$name)
+    {
+        $json["isSuccess"] = false;
+        $json["mes"] = "请输入菜品名称";
+        echo json_encode($json);
+    }
+    else if(!$price)
+    {
+        $json["isSuccess"] = false;
+        $json["mes"] = "请输入价格";
+        echo json_encode($json);
+    }
+    else if(!$hotel)
+    {
+        $json["isSuccess"] = false;
+        $json["mes"] = "请选择餐厅";
+        echo json_encode($json);
+    }
+    else
+    {
+        if(!$id)
+        {
+            if(db_find_one("select * from menu where name='$name'"))
+            {
+                $json["isSuccess"] = false;
+                $json["mes"] = "菜品名称已存在";
+            }
+            else
+            {
+                $arr = db_exec("insert into menu values(null,'$name','$price',$hotel,$isuse,0,now())");
+                $json["data"] = $arr;
+            }
+        }
+        else
+        {
+            if(db_find_one("select * from menu where name='$name' and id<>$id"))
+            {
+                $json["isSuccess"] = false;
+                $json["mes"] = "菜品名称已存在";
+            }
+            else
+            {
+                $arr = db_exec("update menu set name='$name',price='$price',hotel_id=$hotel,isuse=$isuse where id=$id");
+                $json["data"] = $arr;
+            }
+        }
+        echo json_encode($json);
+    }
+}
+function delmenu()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $id = $_POST["id"];
+    if(!$id)
+    {
+        $json["isSuccess"] = false;
+        $json["mes"] = "参数错误";
+    }
+    else
+    {
+        $arr = db_exec("update menu set isdelete=1 where id=$id");
+        $json["data"] = $arr;
+    }
+    echo json_encode($json);
+}
+function order()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $menu = $_POST["menu"];
+    if(!$menu)
+    {
+        $json["isSuccess"] = false;
+        $json["mes"] = "请选择菜品";
+        echo json_encode($json);
+    }
+    else
+    {
+        $userid = $_SESSION["user"];
+        $day = date('Y-n-j', $time);
+        //$arr = db_exec("insert into choicemenu values(null,$menu,$userid,$day)");
+        //$json["data"] = $arr;
+        $json["data"] = $time;
     }
     echo json_encode($json);
 }
