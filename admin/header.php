@@ -47,7 +47,7 @@ if($_SESSION["role"] == 0)
                         <li><a href="user.php"><i class="icon-font">&#xe017;</i>用户管理</a></li>
                         <li><a href="hotel.php"><i class="icon-font">&#xe037;</i>餐厅管理</a></li>
                         <li><a href="menu.php"><i class="icon-font">&#xe046;</i>菜品管理</a></li>
-                        <li><a href="system.html"><i class="icon-font">&#xe045;</i>今日菜单</a></li>
+                        <li><a href="over.php"><i class="icon-font">&#xe045;</i>今日菜单</a></li>
                     </ul>
                 </li>
                 <?php }?>

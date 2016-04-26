@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50045
 File Encoding         : 65001
 
-Date: 2016-04-26 01:04:35
+Date: 2016-04-27 00:27:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,12 +24,16 @@ CREATE TABLE `choicemenu` (
   `menu_id` int(11) default NULL,
   `user_id` int(11) default NULL,
   `daydate` date default NULL,
+  `isover` tinyint(4) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of choicemenu
 -- ----------------------------
+INSERT INTO `choicemenu` VALUES ('6', '8', '22', '2016-04-26', '0');
+INSERT INTO `choicemenu` VALUES ('8', '8', '23', '2016-04-26', '0');
+INSERT INTO `choicemenu` VALUES ('14', '8', '22', '2016-04-27', '0');
 
 -- ----------------------------
 -- Table structure for dayhotel
@@ -79,7 +83,7 @@ CREATE TABLE `menu` (
   `isdelete` tinyint(4) default '0',
   `addtime` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
@@ -87,6 +91,11 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` VALUES ('1', '菜品1', '123', '2', '1', '1', '2016-04-26 00:30:09');
 INSERT INTO `menu` VALUES ('2', '123', '43', '10', '1', '0', '2016-04-26 00:30:21');
 INSERT INTO `menu` VALUES ('3', '滴答滴', '齐全', '9', '0', '0', '2016-04-26 00:31:27');
+INSERT INTO `menu` VALUES ('4', 'sdf', '34', '10', '1', '0', '2016-04-26 22:36:56');
+INSERT INTO `menu` VALUES ('5', '23432', '324', '10', '1', '0', '2016-04-26 22:36:59');
+INSERT INTO `menu` VALUES ('6', '234234', '4234324', '10', '1', '0', '2016-04-26 22:37:02');
+INSERT INTO `menu` VALUES ('7', '3213123', '213213', '10', '1', '0', '2016-04-26 22:37:04');
+INSERT INTO `menu` VALUES ('8', '234324', '324324', '10', '1', '0', '2016-04-26 22:37:06');
 
 -- ----------------------------
 -- Table structure for user
@@ -98,20 +107,22 @@ CREATE TABLE `user` (
   `password` varchar(50) default NULL,
   `role_id` int(11) default NULL,
   `addtime` datetime default NULL,
+  `isnext` tinyint(4) default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '哈哈', '342', '1', '2016-04-24 10:46:25');
-INSERT INTO `user` VALUES ('22', '123', '123', '1', '2016-04-24 21:00:51');
-INSERT INTO `user` VALUES ('23', '1234', '1234', '2', '2016-04-24 21:01:47');
-INSERT INTO `user` VALUES ('25', 'dsfgfd123', 'g123', '1', '2016-04-24 21:02:51');
-INSERT INTO `user` VALUES ('32', '4535', '345345', '1', '2016-04-24 22:41:07');
-INSERT INTO `user` VALUES ('31', '打过', 'ret', '1', '2016-04-24 22:34:05');
-INSERT INTO `user` VALUES ('33', '34543', '54354', '1', '2016-04-24 22:41:10');
-INSERT INTO `user` VALUES ('34', '玩儿', '123', '2', '2016-04-24 22:41:12');
-INSERT INTO `user` VALUES ('42', '324', '234', '1', '2016-04-25 00:40:41');
-INSERT INTO `user` VALUES ('36', '2342342', '34324', '1', '2016-04-24 22:41:18');
-INSERT INTO `user` VALUES ('38', '水电费水电费是', 'werewr', '2', '2016-04-24 22:41:29');
+INSERT INTO `user` VALUES ('1', '哈哈', '342', '1', '2016-04-24 10:46:25', null);
+INSERT INTO `user` VALUES ('22', '123', '123', '1', '2016-04-24 21:00:51', '1');
+INSERT INTO `user` VALUES ('23', '1234', '1234', '2', '2016-04-24 21:01:47', '0');
+INSERT INTO `user` VALUES ('25', 'dsfgfd123', 'g123', '1', '2016-04-24 21:02:51', null);
+INSERT INTO `user` VALUES ('32', '4535', '345345', '1', '2016-04-24 22:41:07', null);
+INSERT INTO `user` VALUES ('31', '打过', 'ret', '1', '2016-04-24 22:34:05', null);
+INSERT INTO `user` VALUES ('33', '34543', '54354', '1', '2016-04-24 22:41:10', null);
+INSERT INTO `user` VALUES ('34', '玩儿', '123', '2', '2016-04-24 22:41:12', null);
+INSERT INTO `user` VALUES ('42', '324', '234', '1', '2016-04-25 00:40:41', null);
+INSERT INTO `user` VALUES ('36', '2342342', '34324', '1', '2016-04-24 22:41:18', null);
+INSERT INTO `user` VALUES ('38', '水电费水电费是', 'werewr', '2', '2016-04-24 22:41:29', null);
+INSERT INTO `user` VALUES ('43', 'yyy', '123', '2', '2016-04-26 23:32:40', '0');

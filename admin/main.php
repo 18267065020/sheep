@@ -36,9 +36,21 @@ else if($param == "delmenu")
 {
     delmenu();
 }
-if($param == "order")
+else if($param == "order")
 {
     order();
+}
+else if($param == "orderdel")
+{
+    orderdel();
+}
+else if($param == "over")
+{
+    over();
+}
+else if($param == "next")
+{
+    isnext();
 }
 function login()
 {
@@ -66,6 +78,18 @@ function login()
             $_SESSION["user"] = $user["id"];
             $json["isSuccess"] = true;
             $json["mes"] = "登录成功";
+            $count = db_find_one("select count(1) count from choicemenu where daydate=CURDATE()");
+            $countvalue = $count["count"];
+            if(!$countvalue)
+            {
+                $users = db_find("select * from user where isnext=1");
+                foreach ($users as $k1 => $v1) {
+                    $item_userid = $v1["id"];
+                    $item = db_find_one("select * from choicemenu where user_id=$item_userid order by daydate limit 0,1");
+                    $itemmenu = $item["menu_id"];
+                    db_exec("insert into choicemenu values(null,$itemmenu,$item_userid,CURDATE(),0)");
+                }
+            }
         }
         else
         {
@@ -105,7 +129,7 @@ function adduser()
             }
             else
             {
-                $arr = db_exec("insert into user values(null,'$name','$pw',$role,now())");
+                $arr = db_exec("insert into user values(null,'$name','$pw',$role,now(),0)");
                 $json["data"] = $arr;
             }
         }
@@ -309,11 +333,43 @@ function order()
     else
     {
         $userid = $_SESSION["user"];
-        $day = date('Y-n-j', $time);
-        //$arr = db_exec("insert into choicemenu values(null,$menu,$userid,$day)");
-        //$json["data"] = $arr;
-        $json["data"] = $time;
+        if(db_find_one("select * from choicemenu where menu_id=$menu and user_id=$userid and daydate=CURDATE()"))
+        {
+            $json["isSuccess"] = false;
+            $json["mes"] = "您已点过餐了";
+        }
+        if(db_find_one("select * from choicemenu where isover=1 and daydate=CURDATE()"))
+        {
+            $json["isSuccess"] = false;
+            $json["mes"] = "今日点餐已结束";
+        }
+        $arr = db_exec("insert into choicemenu values(null,$menu,$userid,CURDATE(),0)");
+        $json["data"] = $arr;
     }
+    echo json_encode($json);
+}
+function orderdel()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $userid = $_SESSION["user"];
+    $arr = db_exec("delete from choicemenu where user_id=$userid and daydate=CURDATE()");
+    $json["data"] = $arr;
+    echo json_encode($json);
+}
+function over()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $arr = db_exec("update choicemenu set isover=1 where daydate=CURDATE()");
+    $json["data"] = $arr;
+    echo json_encode($json);
+}
+function isnext()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $isnext = $_POST["next"];
+    $userid = $_SESSION["user"];
+    $arr = db_exec("update user set isnext=$isnext where id=$userid");
+    $json["data"] = $arr;
     echo json_encode($json);
 }
 ?>

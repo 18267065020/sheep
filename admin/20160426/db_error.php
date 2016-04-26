@@ -1,0 +1,1 @@
+<?php exit;?>	2016-04-26 23:31:55	127.0.0.1	/eat/admin/main.php?param=adduser	0	sql: insert into user values(null,'yyy','123',1,now()), sql errno: 1136, errstr: Column count doesn't match value count at row 1
