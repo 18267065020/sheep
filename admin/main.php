@@ -52,6 +52,10 @@ else if($param == "next")
 {
     isnext();
 }
+else if($param == "updatepw")
+{
+    updatepw();
+}
 function login()
 {
     $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
@@ -71,11 +75,12 @@ function login()
     }
     else
     {
-        $user = db_find_one("select id,role_id from user where name='$name' and password='$pw'");
+        $user = db_find_one("select id,role_id,password from user where name='$name' and password='$pw'");
         if($user)
         {
             $_SESSION["role"] = $user["role_id"];
             $_SESSION["user"] = $user["id"];
+            $_SESSION["userpw"] = $user["password"];
             $json["isSuccess"] = true;
             $json["mes"] = "登录成功";
             $count = db_find_one("select count(1) count from choicemenu where daydate=CURDATE()");
@@ -370,6 +375,25 @@ function isnext()
     $userid = $_SESSION["user"];
     $arr = db_exec("update user set isnext=$isnext where id=$userid");
     $json["data"] = $arr;
+    echo json_encode($json);
+}
+function updatepw()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $pw = $_POST["pw"];
+    if(!$pw)
+    {
+        $json["isSuccess"] = false;
+        $json["mes"] = "修改密码不能为空";
+        echo json_encode($json);
+    }
+    else
+    {
+        $userid = $_SESSION["user"];
+        $arr = db_exec("update user set password='$pw' where id=$userid");
+        $_SESSION["userpw"] = $pw;
+        $json["data"] = $arr;
+    }
     echo json_encode($json);
 }
 ?>

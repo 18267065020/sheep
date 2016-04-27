@@ -1,7 +1,0 @@
-<?php exit;?>	2016-04-27 00:00:52	127.0.0.1	/eat/admin/index.php	0	<br> Error[1024]: Database Error:Unknown column 'user_id' in 'where clause', File: E:\AppServ\www\eat\xiunophp\db.class.php, Line: 315
-<?php exit;?>	2016-04-27 00:22:52	127.0.0.1	/eat/admin/main.php?param=login	0	 Error[8]: Undefined index:  count, File: E:\AppServ\www\eat\admin\main.php, Line: 82
-<?php exit;?>	2016-04-27 00:22:52	127.0.0.1	/eat/admin/main.php?param=login	0	 Error[8]: Undefined variable: userid, File: E:\AppServ\www\eat\admin\main.php, Line: 91
-<?php exit;?>	2016-04-27 00:22:52	127.0.0.1	/eat/admin/main.php?param=login	0	 Error[1024]: Database Error:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURDATE(),0)' at line 1, File: E:\AppServ\www\eat\xiunophp\db.class.php, Line: 315
-<?php exit;?>	2016-04-27 00:23:34	127.0.0.1	/eat/admin/main.php?param=login	0	 Error[8]: Undefined index:  count, File: E:\AppServ\www\eat\admin\main.php, Line: 83
-<?php exit;?>	2016-04-27 00:25:36	127.0.0.1	/eat/admin/main.php?param=login	0	 Error[8]: Undefined index:  id, File: E:\AppServ\www\eat\admin\main.php, Line: 88
-<?php exit;?>	2016-04-27 00:25:36	127.0.0.1	/eat/admin/main.php?param=login	0	 Error[1024]: Database Error:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURDATE(),0)' at line 1, File: E:\AppServ\www\eat\xiunophp\db.class.php, Line: 315

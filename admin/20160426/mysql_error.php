@@ -1,3 +1,0 @@
-<?php exit;?>	2016-04-26 22:47:41	127.0.0.1	/eat/admin/main.php?param=order	0	mysql sql: select * from menu where menu_id=2 and user_id=22 and daydate=CURDATE(), mysql errno: 1054, errstr: Unknown column 'menu_id' in 'where clause'
-<?php exit;?>	2016-04-26 22:48:31	127.0.0.1	/eat/admin/main.php?param=order	0	mysql sql: select * from menu where menu_id=2 and user_id=22 and daydate=CURDATE(), mysql errno: 1054, errstr: Unknown column 'menu_id' in 'where clause'
-<?php exit;?>	2016-04-26 22:48:48	127.0.0.1	/eat/admin/main.php?param=order	0	mysql sql: select * from menu where menu_id=2 and user_id=22 and daydate=CURDATE(), mysql errno: 1054, errstr: Unknown column 'menu_id' in 'where clause'

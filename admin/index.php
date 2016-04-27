@@ -9,7 +9,7 @@ $isc = db_find_one("select * from choicemenu where user_id=$user_id and daydate=
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="index.php">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">菜单管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="index.php">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">我要点餐</span></div>
         </div>
         <div class="result-wrap">
                 <div class="result-title">
