@@ -48,6 +48,10 @@ else if($param == "over")
 {
     over();
 }
+else if($param == "retover")
+{
+    retover();
+}
 else if($param == "next")
 {
     isnext();
@@ -75,11 +79,12 @@ function login()
     }
     else
     {
-        $user = db_find_one("select id,role_id,password from user where name='$name' and password='$pw'");
+        $user = db_find_one("select id,name,role_id,password from user where name='$name' and password='$pw'");
         if($user)
         {
             $_SESSION["role"] = $user["role_id"];
             $_SESSION["user"] = $user["id"];
+            $_SESSION["username"] = $user["name"];
             $_SESSION["userpw"] = $user["password"];
             $json["isSuccess"] = true;
             $json["mes"] = "登录成功";
@@ -338,7 +343,7 @@ function order()
     else
     {
         $userid = $_SESSION["user"];
-        if(db_find_one("select * from choicemenu where menu_id=$menu and user_id=$userid and daydate=CURDATE()"))
+        if(db_find_one("select * from choicemenu where user_id=$userid and daydate=CURDATE()"))
         {
             $json["isSuccess"] = false;
             $json["mes"] = "您已点过餐了";
@@ -348,7 +353,10 @@ function order()
             $json["isSuccess"] = false;
             $json["mes"] = "今日点餐已结束";
         }
-        $arr = db_exec("insert into choicemenu values(null,$menu,$userid,CURDATE(),0)");
+        if($json["isSuccess"])
+        {
+            $arr = db_exec("insert into choicemenu values(null,$menu,$userid,CURDATE(),0)");
+        }
         $json["data"] = $arr;
     }
     echo json_encode($json);
@@ -358,6 +366,12 @@ function orderdel()
     $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
     $userid = $_SESSION["user"];
     $arr = db_exec("delete from choicemenu where user_id=$userid and daydate=CURDATE()");
+    $count = db_find_one("select count(1) count from choicemenu where daydate=CURDATE()");
+    $countvalue = $count["count"];
+    if(!$countvalue)
+    {
+        db_exec("update user set isnext=0 where id=$userid");
+    }
     $json["data"] = $arr;
     echo json_encode($json);
 }
@@ -365,6 +379,13 @@ function over()
 {
     $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
     $arr = db_exec("update choicemenu set isover=1 where daydate=CURDATE()");
+    $json["data"] = $arr;
+    echo json_encode($json);
+}
+function retover()
+{
+    $json = array('mes'=>"操作成功",'isSuccess'=>true,'data'=>array());
+    $arr = db_exec("update choicemenu set isover=0 where daydate=CURDATE()");
     $json["data"] = $arr;
     echo json_encode($json);
 }

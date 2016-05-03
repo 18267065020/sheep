@@ -46,6 +46,16 @@ include '../xiunophp/xiunophp.php';
 <p align="center"> by -- 杨顺康 qq:373175646 </p>
 <script type="text/javascript">
   $("#button").click(function(){
+    if($.trim($("#username").val()) == "")
+    {
+      alert("请输入账号");
+      return;
+    }
+    if($.trim($("#userpwd").val()) == "")
+    {
+      alert("请输入密码");
+      return;
+    }
     $.post("main.php?param=login",
       {
         name:$("#username").val(),
@@ -62,6 +72,11 @@ include '../xiunophp/xiunophp.php';
             alert(data.mes);
         }
       });
+  });
+  $(document).keydown(function(e){
+    if(e.keyCode==13){
+       $("#button").click();
+    }
   });
 </script>
 
