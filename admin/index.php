@@ -28,21 +28,26 @@ $isc = db_find_one("select * from choicemenu where user_id=$user_id and daydate=
                         <tr>
                             <th width="5%">标签ID</th>
                             <th width="10%">菜品名称</th>
-                            <th width="10%">菜品价格</th>
-                            <th width="10%">操作</th>
+                            <th width="5%">菜品价格</th>
+                            <th width="10%">点餐</th>
                             <th width="10%">以后都吃这个</th>
-                            <th width="55%">已点餐人</th>
+                            <th width="50%">已点餐人</th>
+                            <th width="5%">点餐人数</th>
+                            <th width="5%">费用</th>
                         </tr>
                         <?php
                         $arr = db_find("select * from menu where hotel_id=$hotelid and isdelete=0 and isuse=1 order by addtime desc ");
                         $num = 0;
+                        $countprice = 0;
+                        $countpeople = 0;
                         foreach ($arr as $key => $value) {
                             $num++;
+                            $price = $value["price"];
                             ?>
                         <tr>
                             <td data-id="<?php echo $value["id"];?>"><?php echo $num;?></td>  
                             <td><?php echo $value["name"];?></td> 
-                            <td><?php echo $value["price"];?></td> 
+                            <td><?php echo $price;?></td> 
                             <td><?php
                                 if(db_find_one("select * from choicemenu where isover=1 and daydate=CURDATE()"))
                                 {
@@ -51,10 +56,10 @@ $isc = db_find_one("select * from choicemenu where user_id=$user_id and daydate=
                                 else{
                                 if($isc && $isc["menu_id"] == $value["id"])
                                 {?>
-                                <a class="link-del" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">取消</a>
+                                <a class="link-del" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">换一个</a>
                                 <?php 
                                 }elseif(!$isc){ ?>
-                                <a class="link-update" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">点餐</a>
+                                <a class="link-update" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">吃这个</a>
                                 <?php }}?>
                             </td> 
                             <td>
@@ -62,16 +67,18 @@ $isc = db_find_one("select * from choicemenu where user_id=$user_id and daydate=
                             $menu_id = $value["id"];
                             $isnext = db_find_one("select * from choicemenu where user_id=$user_id and menu_id=$menu_id and daydate=CURDATE()");
                             $usernext = db_find_one("select * from user where id=$user_id");
+                                if(!db_find_one("select * from choicemenu where isover=1 and daydate=CURDATE()"))
+                                {
                             if($isnext)
                             {
                                 if($usernext["isnext"]){
                                 ?>
-                                <a class="link-next2" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">取消</a>
+                                <a class="link-next2" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">以后不吃这个了</a>
                                 <?php
                                 }else{
                                     ?>
-                                    <a class="link-next1" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">确定</a>
-                                <?php }}
+                                    <a class="link-next1" href="javascript:void(0);" data-id="<?php echo $value['id'];?>">以后就吃这个</a>
+                                <?php }}}
                                 ?>
                             </td> 
                             <td><?php 
@@ -80,10 +87,13 @@ $isc = db_find_one("select * from choicemenu where user_id=$user_id and daydate=
                         echo $value["name"]."、";
                     }
                     ?></td> 
+                            <td><?php $countpeople += count($noc); echo count($noc);?></td> 
+                            <td><?php $countprice += (count($noc) * $price); echo count($noc) * $price;?></td> 
                         </tr>
                             <?php
                         }
                         ?>
+                        <tr><td>总计：</td><td colspan="5"></td><td><?php echo $countpeople;?></td><td><?php echo $countprice; ?></td></tr>
                     </table>
                 </div>
         </div>
@@ -122,7 +132,7 @@ $isc = db_find_one("select * from choicemenu where user_id=$user_id and daydate=
             {
                 var item = obj.closest("tr");
                 item.html("<td colspan='" + item.children("td").length + "'>取消成功</td>");
-                    setTimeout(function(){location.reload();},1000);
+                setTimeout(function(){location.reload();},1000);
             }
             else
             {

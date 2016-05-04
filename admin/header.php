@@ -22,7 +22,7 @@ if(!$countvalue)
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>点餐喽，小子们</title>
+    <title>hey，点餐喽，小子们</title>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
@@ -32,7 +32,8 @@ if(!$countvalue)
 <div class="topbar-wrap">
     <!--<div class="topbar-inner clearfix">-->
         <div class="topbar-logo-wrap clearfix">
-            <h1 class="topbar-logo"><a href="index.php" class="navbar-brand">点餐喽，小子们</a></h1>
+            <h1 class="topbar-logo"><a href="index.php" class="navbar-brand">hey，点餐喽，小子们</a></h1>
+            <h1 class="topbar-logo">欢迎您，<?php echo $_SESSION["username"];?></h1>
             <span onclick="javascript:location.href='main.php?param=loginout';" style="cursor:pointer;">注销</span><span style="width:10px; display:inline-block;"></span>
             <span id="updatepw" style="cursor:pointer;">修改密码</span>
             <span></span>
@@ -70,8 +71,11 @@ if(!$countvalue)
     </div>
     <script type="text/javascript">
         $("#updatepw").click(function(){
-            $(this).next().append('<span style="width:10px; display:inline-block;"></span><input type="password" id="userpw" name="userpw" value="<?php echo $_SESSION["userpw"];?>" />');
-            $("#userpw").after('<span style="width:10px; display:inline-block;"></span><a href="javascript:void(0)" id="sub">保存</a>');
+            if($(this).next().html() == "")
+            {
+                $(this).next().append('<span style="width:10px; display:inline-block;"></span><input type="password" id="userpw" name="userpw" value="<?php echo $_SESSION["userpw"];?>" />');
+                $("#userpw").after('<span style="width:10px; display:inline-block;"></span><a href="javascript:void(0)" id="sub">保存</a>');
+            }
         });
         $("#sub").live("click",function(){
             var obj = $(this);
