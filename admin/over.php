@@ -1,7 +1,7 @@
 <?php  
 include './header.php';
 $hotel = db_find_one("select id,name from hotel where isdefault=1");
-$hotelid = $hotel["id"];
+$hotelid = $hotel["id"] ? $hotel["id"] : 0;
 $user_id = $_SESSION["user"];
 $isc = db_find_one("select * from choicemenu where user_id=$user_id and daydate=CURDATE()");
 ?>
