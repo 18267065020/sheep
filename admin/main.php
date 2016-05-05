@@ -325,8 +325,28 @@ function delmenu()
     }
     else
     {
-        $arr = db_exec("update menu set isdelete=1 where id=$id");
-        $json["data"] = $arr;
+        if(db_find_one("select * from choicemenu where menu_id=$id and daydate=CURDATE() limit 0,1"))
+        {
+            $json["isSuccess"] = false;
+            $json["mes"] = "今日有人点此菜品";
+        }
+        $users = db_find("select * from user where isnext=1");
+        foreach ($users as $k1 => $v1) {
+            $item_userid = $v1["id"];
+            $item = db_find_one("select * from choicemenu where user_id=$item_userid order by daydate limit 0,1");
+            $itemmenu = $item["menu_id"];
+            if($itemmenu == $id)
+            {
+                $json["isSuccess"] = false;
+                $json["mes"] = "有人连续吃此菜品";
+                break;
+            }
+        }
+        if($json["isSuccess"])
+        {
+            $arr = db_exec("update menu set isdelete=1 where id=$id");
+            $json["data"] = $arr;
+        }
     }
     echo json_encode($json);
 }

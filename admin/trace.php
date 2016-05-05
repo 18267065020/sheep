@@ -1,6 +1,6 @@
 <?php  
 include './header.php';
-$table = "menu";
+$table = "trace";
 $page = param("trace");
 if(!$page)
 {
